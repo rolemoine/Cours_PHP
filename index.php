@@ -62,10 +62,10 @@
 			// Affichage du bouton suivant et lien vers la page qu'il renvoie 
 			if($numero_page!=1)// Il n apparaitra pas pour la premiere page car la page 0 n existe pas
 			{
-                $precedent=$numero_page-1;
-                echo'<a href = "index.php?page=' . $precedent . '">précédent</a>';   
+               		 	$precedent=$numero_page-1;
+                		echo'<a href = "index.php?page=' . $precedent . '">précédent</a>';   
  
-            }
+           		 }
 
 
 			// Affichage des boutons et des liens correspondant à chaque numero de page. il y aura nombre_total_pages de boutons avec liens associés
@@ -77,10 +77,10 @@
 			$numero_page = $_GET['page'];			
 			if($numero_page<$nombre_total_pages)//Il n apparaitra que si la page actuelle ne depasse pas le nombre de page total
 			{
-                $suivant=$numero_page+1;
-                echo'<a href = "index.php?page=' . $suivant . '">suivant</a>';   
+               			 $suivant=$numero_page+1;
+                		 echo'<a href = "index.php?page=' . $suivant . '">suivant</a>';   
  
-            }			
+           		 }			
 
 		?>
     </body>
