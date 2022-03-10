@@ -17,6 +17,11 @@
 			
 			// Connexion a la base de donnée mySQL
 			$connexion = new mysqli($serveur, $utilisateur, $mot_de_passe);
+	    		// Afficher message erreur si probleme de connexion a la base de donnee 
+			if (mysqli_connect_error()) {
+                    		printf("Probleme de connexion a la base de donnée " ,mysqli_connect_error());
+				exit();
+                	}
 			
 			// Definition du nombre d elements par page 
 			$nb_elements = 10;  
@@ -55,7 +60,10 @@
 
 				echo $ligne['CODE_DU_SALARIE'] . ' ' . $ligne['SALAIRE_MENSUEL'] . '</br>';  // ici seul 2 colonnes seront affichées, celles contenant le code du salarie et celle contenant le salaire du salarie correspondant
 
-			}    
+			}   
+	    
+	    		// Fermeture de la base de donnée 
+			mysqli_close($connexion);
 
 			// Affichage de la pagination
 
