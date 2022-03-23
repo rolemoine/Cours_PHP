@@ -6,7 +6,7 @@ L'interface initiale est la suivante :
 
 ![alt text](rendu_index.png)
 
-Il y a 6 images par pages. Ici, la base de donnée ne contient que 7 images, aussi il y aura 2 pages.
+Il y a 6 images par pages. Aussi, sachant que la base de données ne contient que 7 images, il y aura 2 pages.
 
 Si l'utilisateur souhaite télécharger une image il suffit qu'il clique sur le lien 'ajouter des images' qui le renverra vers le formulaire suivant:
 
