@@ -14,43 +14,7 @@
 		
 	
         <?php
-		
-		// La boucle suivante permet d'affichier les si l image a ete correctement telechargee 
-		// à partir du formulaire ou quelle erreur à empêché le bon déroulement du téléchargement
-		// Un bandeau s'affichera pour donner l information sur le téléchargmeent de l image
-		
-		 if (isset($_GET['erreur'])) {
-                if ($_GET['erreur'] == 0) // L image a été correctement telechargée
-				{
-                    echo "<h3 style='text-align:center;color: green;'> Téléchargement de l'image effectué </h3>";
-                }                 
-				if ($_GET['erreur'] == 1) // Taille limite du serveur depassé 
-				{
-                    echo "<h3 style='text-align:center;color: red;'> Le fichier dépasse la limite autorisée par le serveur </h3>";
-                }
-				if ($_GET['erreur'] == 2) // Taille limite autorisée par le fomulaire dépassée
-				{
-                    echo "<h3 style='text-align:center;color: red;'> Le fichier dépasse la taille maximale acceptée </h3>";
-                }
-				if ($_GET['erreur'] == 3) // Erreur dans le chargement
-					{
 
-                    echo "<h3 style='text-align:center;color: red;'> Erreur dans le téléchargement du fichier </h3>";
-                }
-				if ($_GET['erreur'] == 4) // L utilisateur n a rentré aucun ficher
-					{
-                    echo "<h3 style='text-align:center;color: red;' > Aucun fichier n'a été envoyé. Merci de recommencer </h3>";
-                }				
- 				if ($_GET['erreur'] == 5)  // L extension de l image n est pas supportée
-				{
-                    echo "<h3 style='text-align:center;color: red;' > Le format de l'image n'est pas supporté </h3>";
-                }	
- 				if ($_GET['erreur'] == 6)  // Probleme de connexion a la BDD
-				{
-                    echo "<h3 style='text-align:center;color: red;' > Probleme de connexion à la base de donnée </h3>";
-                }					
-            }
-		
 			// Informations pour la connexion a la base de donnee mySQL
 			$serveur = "localhost";
 			$utilisateur = "root";
