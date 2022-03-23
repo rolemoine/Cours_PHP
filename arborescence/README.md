@@ -4,7 +4,7 @@ L'objectif de cette partie est de récupérer tous les chemins d'accès aux imag
 
 Dans un premier temps il faudra afficher tous les dossiers et fichiers puis insérer dans la BDD seulement le nom, la taille, le chemin et l'extension des images.
 
-![alt text](rendu_arbo.png)
+![alt text](rendu_arborescence.png)
 
 Dans un deuxième temps on affichera en reprenant le script de pagination les images :
 
