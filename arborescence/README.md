@@ -6,7 +6,7 @@ Dans un premier temps il faudra afficher tous les dossiers et fichiers puis ins�
 
 ![alt text](rendu_arborescence.png)
 
-Dans un deuxième temps on affichera en reprenant le script de pagination les images :
+Dans un deuxième temps on affichera en reprenant le script de pagination les images avec un affichage de 6 images par page :
 
 ![alt text](rendu_images.png)
 
