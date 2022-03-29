@@ -8,4 +8,4 @@ Le deuxième travail consiste à téléverser un fichier vers un dossier
 
 Le troisième travail consiste en la lecture récursive du contenu d'un dossier
 
-Enfin le dernier travail est un travail de synthèse reprenant les idées des travaux précédents
+Enfin le dernier travail est un travail de synthèse reprenant les idées des travaux précédents et en ajoutant également un fonctionnalité permettant de supprimer une image
