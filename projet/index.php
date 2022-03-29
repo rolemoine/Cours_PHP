@@ -43,19 +43,26 @@
                 }				
  				if ($_GET['erreur'] == 5)  // L extension de l image n est pas supportée
 				{
-                    echo "<h3 style='text-align:center;color: red;' > Le format de l'image n'est pas supporté </h3>";
+                    echo "<h3 style='text-align:center;color: red;' > Aucun fichier n'a été envoyé. Merci de recommencer </h3>";
                 }	
- 				if ($_GET['erreur'] == 6)  // Probleme de connexion a la BDD
+				if ($_GET['erreur'] == 6)  // Probleme de connexion mysql
 				{
-                    echo "<h3 style='text-align:center;color: red;' > Probleme de connexion à la base de donnée </h3>";
-                }					
+                    echo "<h3 style='text-align:center;color: red;' > Probleme de connexion a la base de données </h3>";
+                }
+				if ($_GET['erreur'] == 'true') // L image a bien ete supprimee
+					{
+                    echo "<h3 style='text-align:center;color: blue;' > L'image a bien été supprimée </h3>";
+                }				
+ 				if ($_GET['erreur'] == 'false')  // Probleme dans la suppression d image
+				{
+                    echo "<h3 style='text-align:center;color: red;' > L'image n'a pas pu être supprimée </h3>";
+                }				
             }
 		
 			// Informations pour la connexion a la base de donnee mySQL
 			$serveur = "localhost";
 			$utilisateur = "root";
 			$mot_de_passe = "root";
-			$database = "images";
 			
 			
 			// Connexion a la base de donnée mySQL
@@ -93,14 +100,12 @@
 			// Calcul du numero de la premiere ligne à aller chercher dans la base de donnee pour la page numero_page
 			$premiere_ligne = ($numero_page-1) * $nb_elements;   
 			
-			// Recuperation des nb_elements de la page numero_page correspondant aux lignes comprises entre (premiere_ligne et premiere_ligne+nb_elements)   
-			// Les elements seront classés du plus récent au plus ancien pour afficher dans la premiere page par exemple 
-			// les dernieres images ajoutées par l utilisateur
+			// Recuperation des nb_elements de la page numero_page correspondant aux lignes comprises entre (premiere_ligne et premiere_ligne+nb_elements)    
 			$requete_mysql = "SELECT * FROM images.im  ORDER BY id DESC LIMIT " . $premiere_ligne . ',' . $nb_elements ;  
-			$table = $connexion->query($requete_mysql); // table contenant les 6 images qui devront être affichées pour la page considérée
+			$table = $connexion->query($requete_mysql); 
 		?>
 			
-		<! cette partie sert a afficher les images sous forme d un tableau -->
+		<! cette partie sert a afficher les donnees sous forme d un tableau -->
 			
 			<table>
 				<table border="0">
@@ -110,23 +115,65 @@
 					// Affichage de l ensemble des images contenues dans la BDD
 					
 					$i = 0; // Initilisation de i qui servira de compteur pour savoir quand passer à la ligne
-					while ($ligne = mysqli_fetch_array($table)) // Boucle pour afficher les 6 images qui composent la page actuelle
+					while ($ligne = mysqli_fetch_array($table)) // Boucle pour afficher les 6 images qui composentla page actuelle
 						{
-						
-						echo '<td>'.'<img src="images/'.$ligne['name'].'" alt="top"  height="260" width="300">'; // Affichage de l image a partir de son nom en allant la chercher dans le dossier images						
-						echo '<br>'. $ligne['name'].'<br>'.$ligne['size'].'ko'.'<td>'; // Affichage de son nom et de sa taille
+						// Affichage de l image a partir de son nom en allant la chercher dans le dossier images
+						echo '<td>'.'<img src="images/'.$ligne['name'].'" alt="top"  height="260" width="300">'; 
+						// Affichage de son nom et de sa taille
+						echo '<br>'. $ligne['name'].'<br>'.$ligne['size'].'ko'; 
+						// affichage du boutton supprimer qui aura comme valeur de référence l'id qui est une clé unique de la table
+						echo '<br><a href="?deleteid='.$ligne["id"].'" class="btn btn-primary">Supprimer</a><td>'; 
 						
 						$i = $i+1; // incrementation du compteur
 						
-						if ($i % 3 ==0) // Si on a affiche les 3 images sur la meme ligne on passe a la ligne suivante
+						if ($i % 3 ==0) 
+						// Si on a affiche les 3 images sur la meme ligne on passe a la ligne suivante
 						{
-							echo'<tr>'; 
+							echo'<tr>'; // On passe a la ligne suivante pour afficher images sous forme de grille
 						}
 
 					} 
 			?>
 
 			</table>
+			
+			<?php 
+			// Création de la condition permettant de supprimer une image si l utilisateur 
+			// clique sur le bouton 
+			if(isset($_GET['deleteid'])) 
+				{
+					// Creation de la requete permettant de recuperer les info liées à l image qu'on veur supprimer en utilisant l id 
+					// retournée lorsque l utilisateur clique sur le bouton supprimer
+					$requete_mysql = "select * from IMAGES.im where id = ".$_GET['deleteid'];
+					// Exécution de la requête
+					$table = $connexion->query($requete_mysql);
+					// Renvoi la requete sous forme de tableau associatif
+					$table = mysqli_fetch_assoc($table);
+					// Création du chemin d acces pour supprimer l image dans le dossier images
+					$DeletePath = "images/".$table['name'];
+					
+					if(unlink($DeletePath)) // si on trouve bien dans le dossier l image a supprimer on la supprime
+					{
+						// Suppression de la ligne dans la base de donnees correspondant a l image à supprimer
+						// l image ne sera alors plus affichée sur la page web
+						$requete_mysql = "delete from IMAGES.im where id = ".$table['id'];
+						// Execution de la requete
+						$tableDelete = $connexion->query($requete_mysql);	
+						
+						if($tableDelete)
+						{
+							// si l image a bien été supprimée dans la BDD l utilisateur en sera informé
+							header('Location:./?erreur=true');
+						}
+					}
+					else
+					{
+						// si l image n a pas pu être supprimé un message d erreur sera renvoyé 
+						header('Location:./?erreur=false');
+					}
+					
+				}
+			?>
 			
 			
 			

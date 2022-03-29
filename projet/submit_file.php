@@ -52,16 +52,14 @@ else{
 			// Requete pour connaitre le nombre d element de la table
 			$requete_mysql = "select * from images.im"; 
 			$table = $connexion->query($requete_mysql); 
-			// Incrementation de l'ID à partir du nombre d elements de la table +1
-			// Cela permettra par la suite l affichage des images du plus récent au plus ancien
-			$id = mysqli_num_rows($table) + 1;
 			// Récupération du nom de l image
 			$name = $_FILES['fichier']['name'];
 			// Récupération du chemin d acces de l image
 			$chemin = realpath($_FILES['fichier']['tmp_name']);
 			
 			// Requete pour inserer l id, la taille, le chemin, le nom ainsi que l extension de l image dans une base de donnée
-			$requete_mysql = "INSERT INTO IMAGES.im (id,size,path,name,extension) VALUES ('$id','$size','$chemin', '$name', '$extension')";
+			// L id est incrémenté automatiquement, on ne lui donne ainsi pas de valeur
+			$requete_mysql = "INSERT INTO IMAGES.im (id,size,path,name,extension) VALUES (NULL,'$size','$chemin', '$name', '$extension')";
 			// Insertion des informations dans la base de donnée
 			$result = $connexion->query($requete_mysql);
 			if ($result) echo "Fichier ajouté : ok";
