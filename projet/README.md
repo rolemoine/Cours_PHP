@@ -1,6 +1,6 @@
-# Partie 1 du projet final : Pagination et téléversement images
+# Partie 1 du projet final : Pagination suppression et téléversement images
 
-L'utilisateur pourra dès à présent télécharger des images de son ordinateur et les afficher sur une page web
+L'utilisateur pourra dès à présent télécharger des images de son ordinateur et les afficher sur une page web. Il pourra également supprimer une image si il souahite s'en séparer
 
 L'interface initiale est la suivante :
 
@@ -26,3 +26,16 @@ En revenche, si une erreur apparait il aura un message d'ereur avec la cause ide
 
 ![alt text](rendu_erreur.png)
 
+Une  nouvelle fonctionnalité a été ajoutée pour supprimer les images à la fois concernant l'affichage sur la page web mais aussi de la base de données et du dossier image dans lequel les images ajoutées ont été téléversées.
+
+Par exemple, si on prend l'interface suivante
+
+![alt text](sup_avant.png)
+
+Et si l'utilisateur souhaite supprimer l'image de Berrettini, il appuiera sur le bouton 'supprimer'
+
+![alt text](sup_après.png)
+
+On voit bien que l'image a été correctement supprimer et il n'appararaitra plus non plus dans la BDD et dans le dossier.
+
+![alt text](bdd_sup.png)
