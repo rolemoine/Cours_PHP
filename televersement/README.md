@@ -2,6 +2,9 @@
 
 Ce travail consiste en un téléversement de fichier à partir d'un formulaire contenu dans le fichier index.php
 
+
+![alt text](formulaire.png)
+
 L'utilisateur basculera alors sur la page submit_file.php 
 
 Le fichier aura cependant des contraintes : 
@@ -13,4 +16,7 @@ Le fichier sera alors envoyé dans un dossier images situé dans le même réper
 
 Son nom, sa taille, son extension ainsi que son nouveau nom seront affichés sur la page web sous forme de tableau.
 
+![alt text](qmf.png)
+
 Ce travail prend également en compte des exeptions
+
